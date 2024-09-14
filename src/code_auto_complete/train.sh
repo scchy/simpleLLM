@@ -1,0 +1,1 @@
+accelerate launch --mixed_precision="fp16"  --num_processes=2 cac_train_new.py

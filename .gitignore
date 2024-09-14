@@ -1,1 +1,6 @@
 src/*/__pycache__
+wandb
+src/*/*.log
+src/*/log
+src/code_auto_complete/results
+*.onnx

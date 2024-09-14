@@ -10,6 +10,23 @@ from torch.utils.data import IterableDataset
 from transformers import AutoTokenizer
 
 
+chars_per_token_doc = """ 
+examples, total_characters, total_tokens = 500, 0, 0
+for _, example in tqdm(zip(range(examples), iter(dataset)), total=examples):
+    total_characters += len(example['content'])
+    total_tokens += len(tokenizer(example['content']).tokens())
+
+characters_per_token = total_characters / total_tokens
+print(characters_per_token)
+
+- OpenAI Official 
+    - A helpful rule of thumb is that one token generally corresponds to ~4 characters of text for common English text. This translates to roughly ¾ of a word (so 100 tokens ~= 75 words)
+
+- summary:
+    - 英文上的效果基本差不太多。一个 token 大概占 0.75～0.8 个单词
+    - 国内的模型在中文语料上特训之后，中文编码的效率显著高于英文的 ChatGPT 和 Llama。一个 token 大概占1.5 个汉字。
+"""
+
 class cacDataset(IterableDataset):
     def __init__(self, tokenizer, dataset, seq_length=1024, num_of_sequences=1024, chars_per_token=3.6, print_flag=False):
         """_summary_
