@@ -151,7 +151,10 @@ wandb.init(project=proj_name, config=training_args.to_dict())
 p_ = f"{CUR_DIR}/cac_tokenizer"
 tokenizer = AutoTokenizer.from_pretrained(p_)
 vocab_size = len(tokenizer.vocab.items())
-with open(f"{CUR_DIR}/cac_config.json", 'r') as f:
+# with open(f"{CUR_DIR}/cac_config.json", 'r') as f:
+#     cfg_js = json.load(f)
+
+with open(f"{CUR_DIR}/cac_config_large.json", 'r') as f:
     cfg_js = json.load(f)
     
 print(f">>>> tokenizer: {tokenizer.eos_token_id=} config-json: {cfg_js['eos_token_id']=}")
@@ -163,7 +166,8 @@ print(f'>>>>>>>>> GPT2LMHeadModel size: {model_size(model):.1f}M parameters')
 cuda_mem()
 
 # dataloader
-data_p = '/home/scc/sccWork/devData/myData/train_data/codeparrot'
+# data_p = '/home/scc/sccWork/devData/myData/train_data/codeparrot'
+data_p = '/gemini/data-1/codeparrot'
 tr_dataloader, val_dataloader, train_dataset, valid_dataset = create_dataloaders(data_p, tokenizer, args)
 trainer = Trainer(
     model=model,

@@ -76,7 +76,7 @@ class cacDataset(IterableDataset):
                     iterator = iter(self.dataset)
             
             all_token_ids = []
-            tokenized_inputs = self.tokenizer(buffer_, truncation=False)
+            tokenized_inputs = self.tokenizer(buffer_, truncation=True)
             for ipts in tokenized_inputs['input_ids']:
                 all_token_ids.extend(ipts + [self.eos])
             
